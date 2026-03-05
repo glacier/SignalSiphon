@@ -16,9 +16,7 @@ from graphql import (
     DocumentNode
 )
 from .base import SignalAdapter
-
-class SchemaError(Exception):
-    pass
+from ..exceptions import SchemaError, AdapterFetchError, GraphQLError
 
 class GraphQLAdapter(SignalAdapter):
     """
@@ -136,11 +134,13 @@ class GraphQLAdapter(SignalAdapter):
                 )
                 response.raise_for_status()
                 data = response.json()
-            except Exception as e:
-                raise Exception(f"Network error fetching GraphQL data: {str(e)}")
+            except httpx.HTTPStatusError as e:
+                raise AdapterFetchError(f"HTTP error fetching GraphQL data: {e.response.status_code}", original_error=e)
+            except httpx.RequestError as e:
+                raise AdapterFetchError(f"Network error fetching GraphQL data: {str(e)}", original_error=e)
 
-        if "errors" in data:
-            raise Exception(f"GraphQL returned errors: {data['errors']}")
+        if "errors" in data and data["errors"]:
+            raise GraphQLError("GraphQL returned validation or execution errors.", errors=data["errors"])
 
         # Return the resolved root object
         root_key = self._root_type.lower()

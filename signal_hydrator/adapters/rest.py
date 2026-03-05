@@ -45,15 +45,32 @@ class RESTAdapter(SignalAdapter):
             if key == "orders":
                  endpoints_to_fetch.add(f"{self.base_url}/{self._root_resource}/{id}/{key}")
                  
+        from ..exceptions import AdapterFetchError
+        
         # 3. Fetch all required endpoints concurrently
         async def fetch_url(client, url):
-            resp = await client.get(url)
-            resp.raise_for_status()
-            return url, resp.json()
+            try:
+                resp = await client.get(url)
+                resp.raise_for_status()
+                return url, resp.json()
+            except httpx.HTTPStatusError as e:
+                raise AdapterFetchError(f"HTTP error fetching REST data from {url}: {e.response.status_code}", original_error=e)
+            except httpx.RequestError as e:
+                raise AdapterFetchError(f"Network error fetching REST data from {url}: {str(e)}", original_error=e)
 
         async with httpx.AsyncClient() as client:
             tasks = [fetch_url(client, url) for url in endpoints_to_fetch]
-            results = await asyncio.gather(*tasks)
+            # Since AGENTS.md says to use ExceptionGroup, we can use return_exceptions=True
+            results = await asyncio.gather(*tasks, return_exceptions=True)
+            
+            # Check for exceptions
+            errors = [res for res in results if isinstance(res, Exception)]
+            if errors:
+                # If there's an ExceptionGroup available in >=3.11, use it. Otherwise raise the first error.
+                try:
+                    raise ExceptionGroup("Multiple errors occurred while fetching REST data", errors)
+                except NameError:
+                    raise errors[0] # Fallback for Python < 3.11
             
         # 4. Stitch the JSON payloads back into a single root dictionary
         root_data = {}
