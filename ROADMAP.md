@@ -103,3 +103,9 @@ Exploring advanced capabilities to make the library an enterprise-grade AI infra
 *   [ ] **Security & Governance (Guardrails):**
     *   **Max Depth Limits:** Enforce fetching depth limits (e.g., `max_depth=2`) to prevent cascading catastrophic database JOINs.
     *   **Field-Level Redaction:** Block specific paths (e.g., `user.billing.credit_card`) from being dynamically loaded into context to prevent PII leaks.
+*   [ ] **API & MCP Server Integration:**
+    *   Wrap the unified `SignalAdapter` underlying mechanisms in an API endpoint (e.g., FastAPI).
+    *   Expose the retrieval via the **Model Context Protocol (MCP)**, allowing desktop clients like Claude or Cursor to natively invoke tool calls like `hydrate_user_context(id="123", paths=["profile.name"])`.
+*   [ ] **Declarative Skill Signals (YAML/JSON):**
+    *   Decouple required signal paths from application code by defining them in configuration files (e.g., `process_refund` intent maps exactly to `["billing.status", "orders"]`).
+    *   Implement a `SkillHydrator` to provision the exact "bag of signals" for an agent node before execution, allowing security teams to audit context boundaries easily without parsing AST strings.
