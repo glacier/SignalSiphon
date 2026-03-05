@@ -78,3 +78,28 @@ Ensuring enterprise readiness.
 *   [ ] **Caching Layer:** Implement LRU caching or Redis integration to prevent re-fetching the same paths across a multi-turn LangGraph conversation.
 *   [ ] **Telemetry & Observability:** Integrate OpenTelemetry/LangSmith tracing to show developers exactly how many tokens they saved via field pruning.
 *   [ ] **Documentation Site:** Launch a MkDocs site with guides for LangChain, LlamaIndex, and raw Jinja deployments.
+
+---
+
+## Phase 5: Future Extensions
+
+Exploring advanced capabilities to make the library an enterprise-grade AI infrastructure tool.
+
+*   [ ] **Robust Caching & Deduplication Layer:**
+    *   Implement TTL caches (e.g., in-memory or Redis) to avoid hitting the network for previously fetched paths.
+    *   Enable semantic sub-fetching (if `user.profile` is cached, fetch only `user.profile.name` if requested later).
+*   [ ] **Advanced / Native Adapters:**
+    *   **OpenAPI/Swagger Adapter:** Parse `openapi.json` to automatically map exact REST routes instead of heuristic guessing.
+    *   **gRPC / Protobuf Adapter:** Support internal gRPC microservices.
+    *   **Hardened SQLAdapter (SQLAlchemy):** Integrate deeply with SQLAlchemy metadata to handle Foreign Keys and relationships natively.
+*   [ ] **OpenTelemetry (OTel) & Observability:**
+    *   Integrate with LangSmith/OpenTelemetry to track "Bytes Saved" metrics.
+    *   Emit traces comparing AST inference time vs. actual network I/O time.
+*   [ ] **Native LangGraph State Middleware:**
+    *   Build middleware for LangGraph's `StateGraph`.
+    *   Allow passing a `ContextProxy` directly as the Graph's internal state. Nodes access properties dynamically, and the graph engine pauses to hydrate state before execution.
+*   [ ] **Multi-Engine AST Support:**
+    *   Extend AST engine beyond Jinja2 to support Python `string.Template`, `Mustache`, or dynamic mapping of Python `f-strings`.
+*   [ ] **Security & Governance (Guardrails):**
+    *   **Max Depth Limits:** Enforce fetching depth limits (e.g., `max_depth=2`) to prevent cascading catastrophic database JOINs.
+    *   **Field-Level Redaction:** Block specific paths (e.g., `user.billing.credit_card`) from being dynamically loaded into context to prevent PII leaks.
