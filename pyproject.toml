@@ -25,4 +25,4 @@ test = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/grace/signal-siphon"
+"Homepage" = "https://github.com/glacier/SignalSiphon"
