@@ -1,0 +1,32 @@
+Metadata-Version: 2.4
+Name: signal-hydrator
+Version: 0.1.0
+Summary: A zero-latency, lazy-loading context hydrator for AI agents
+Project-URL: Homepage, https://github.com/grace/signal-hydrator
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: jinja2>=3.0.0
+Requires-Dist: graphql-core>=3.2.0
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: httpx>=0.24.0
+Provides-Extra: langchain
+Requires-Dist: langchain-core>=0.1.0; extra == "langchain"
+Provides-Extra: test
+Requires-Dist: pytest>=7.0.0; extra == "test"
+Requires-Dist: pytest-asyncio>=0.20.0; extra == "test"
+
+# signal-hydrator
+
+A zero-latency, lazy-loading context hydrator for AI agents.
+
+Stop eagerly fetching massive context payloads for your LLMs. `signal-hydrator` intelligently parses your agent prompts and fetches exactly the fields requested—nothing more, nothing less. 
+
+## Installation
+```bash
+pip install signal-hydrator
+```
+
+For native LangChain and LangGraph support:
+```bash
+pip install signal-hydrator[langchain]
+```
