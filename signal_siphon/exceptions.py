@@ -1,7 +1,7 @@
 from typing import Any, Dict, List, Optional
 
 class SignalHydratorError(Exception):
-    """Base exception for all signal-hydrator errors."""
+    """Base exception for all signal-siphon errors."""
     pass
 
 class SchemaError(SignalHydratorError):

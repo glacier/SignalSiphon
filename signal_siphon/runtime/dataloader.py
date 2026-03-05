@@ -1,6 +1,6 @@
 import asyncio
 from typing import Dict, Any
-from signal_hydrator.runtime.proxy import ContextProxy
+from signal_siphon.runtime.proxy import ContextProxy
 
 class AsyncDataLoader:
     """

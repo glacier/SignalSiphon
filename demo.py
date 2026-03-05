@@ -1,7 +1,7 @@
 import asyncio
-from signal_hydrator.adapters.graphql import GraphQLAdapter
-from signal_hydrator.templating.jinja import JinjaHydrator
-from signal_hydrator.langchain.template import HydratedPromptTemplate
+from signal_siphon.adapters.graphql import GraphQLAdapter
+from signal_siphon.templating.jinja import JinjaHydrator
+from signal_siphon.langchain.template import HydratedPromptTemplate
 
 # 1. Define a strict GraphQL schema
 schema_string = """
@@ -30,7 +30,7 @@ class MockGraphQLAdapter(GraphQLAdapter):
         # Build the exact GraphQL query string the library generated
         query = self.build_query(paths)
         print("\n--- 📡 NETWORK INTERCEPT ---")
-        print("Instead of sending a massive JSON blob, signal-hydrator generated THIS tiny, exact GraphQL query:")
+        print("Instead of sending a massive JSON blob, signal-siphon generated THIS tiny, exact GraphQL query:")
         print(f"\n{query}")
         print("----------------------------\n")
         

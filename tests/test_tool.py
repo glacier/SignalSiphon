@@ -1,6 +1,6 @@
 import pytest
-from signal_hydrator.langchain.tool import HydratorTool
-from signal_hydrator.adapters.base import SignalAdapter
+from signal_siphon.langchain.tool import HydratorTool
+from signal_siphon.adapters.base import SignalAdapter
 from typing import List, Dict, Any
 
 class MockAdapter(SignalAdapter):

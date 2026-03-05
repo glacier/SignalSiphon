@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "signal-hydrator"
+name = "signal-siphon"
 version = "0.1.0"
 description = "A zero-latency, lazy-loading context hydrator for AI agents"
 readme = "README.md"
@@ -25,4 +25,4 @@ test = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/grace/signal-hydrator"
+"Homepage" = "https://github.com/grace/signal-siphon"

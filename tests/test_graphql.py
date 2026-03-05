@@ -1,6 +1,6 @@
 import pytest
-from signal_hydrator import GraphQLAdapter
-from signal_hydrator.adapters.graphql import SchemaError
+from signal_siphon import GraphQLAdapter
+from signal_siphon.adapters.graphql import SchemaError
 
 MOCK_SCHEMA = '''
 type Profile {

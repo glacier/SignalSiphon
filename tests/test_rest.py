@@ -1,5 +1,5 @@
 import pytest
-from signal_hydrator.adapters.rest import RESTAdapter
+from signal_siphon.adapters.rest import RESTAdapter
 import httpx
 
 class MockResponse:

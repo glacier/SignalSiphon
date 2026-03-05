@@ -35,7 +35,7 @@ jobs:
     - name: Type check with mypy
       run: |
         # Run mypy for static type checking.
-        mypy signal_hydrator
+        mypy signal_siphon
 
     - name: Run tests (optional but recommended)
       run: |

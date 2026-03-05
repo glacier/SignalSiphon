@@ -1,7 +1,7 @@
 import pytest
 from httpx import HTTPStatusError, RequestError, Response, Request
-from signal_hydrator.adapters.graphql import GraphQLAdapter
-from signal_hydrator.exceptions import AdapterFetchError, GraphQLError
+from signal_siphon.adapters.graphql import GraphQLAdapter
+from signal_siphon.exceptions import AdapterFetchError, GraphQLError
 
 MOCK_SCHEMA = '''
 type Profile { name: String! }

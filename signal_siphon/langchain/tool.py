@@ -1,6 +1,6 @@
 from typing import Type, Any, Optional
 from pydantic import BaseModel, create_model, Field
-from signal_hydrator.adapters.base import SignalAdapter
+from signal_siphon.adapters.base import SignalAdapter
 
 try:
     from langchain_core.tools import BaseTool

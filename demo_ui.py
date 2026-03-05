@@ -1,13 +1,13 @@
 import streamlit as st
 import asyncio
-from signal_hydrator.adapters.graphql import GraphQLAdapter
-from signal_hydrator.templating.jinja import JinjaHydrator
-from signal_hydrator.langchain.template import HydratedPromptTemplate
+from signal_siphon.adapters.graphql import GraphQLAdapter
+from signal_siphon.templating.jinja import JinjaHydrator
+from signal_siphon.langchain.template import HydratedPromptTemplate
 
 st.set_page_config(page_title="Signal Hydrator Demo", layout="wide", page_icon="💧")
 
 st.title("💧 Signal Hydrator - Zero-Latency Context Demo")
-st.markdown("This interactive UI demonstrates how `signal-hydrator` parses a prompt template, fetches only the exact fields needed via GraphQL, and hydrates the prompt.")
+st.markdown("This interactive UI demonstrates how `signal-siphon` parses a prompt template, fetches only the exact fields needed via GraphQL, and hydrates the prompt.")
 
 # Mock Schema
 schema_string = """

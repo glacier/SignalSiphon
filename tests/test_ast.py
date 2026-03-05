@@ -1,5 +1,5 @@
 import pytest
-from signal_hydrator import JinjaHydrator
+from signal_siphon import JinjaHydrator
 
 def test_extract_simple_paths():
     hydrator = JinjaHydrator()

@@ -1,17 +1,17 @@
-# signal-hydrator
+# signal-siphon
 
 A zero-latency, lazy-loading context hydrator for AI agents.
 
-Stop eagerly fetching massive context payloads for your LLMs. `signal-hydrator` intelligently parses your agent prompts and fetches exactly the fields requested—nothing more, nothing less. 
+Stop eagerly fetching massive context payloads for your LLMs. `signal-siphon` intelligently parses your agent prompts and fetches exactly the fields requested—nothing more, nothing less. 
 
 ## Installation
 ```bash
-pip install signal-hydrator
+pip install signal-siphon
 ```
 
 For native LangChain and LangGraph support:
 ```bash
-pip install "signal-hydrator[langchain]"
+pip install "signal-siphon[langchain]"
 ```
 
 ## Features
@@ -26,7 +26,7 @@ pip install "signal-hydrator[langchain]"
 The easiest way to integrate the library is with LangChain's native templating.
 
 ```python
-from signal_hydrator import HydratedPromptTemplate, GraphQLAdapter, JinjaHydrator
+from signal_siphon import HydratedPromptTemplate, GraphQLAdapter, JinjaHydrator
 
 # 1. Define your strict data source
 adapter = GraphQLAdapter(
@@ -53,7 +53,7 @@ final_prompt = await template.aformat(user="user_123")
 For Python execution environments where prompts are completely dynamic, use the `ContextProxy` and `AsyncDataLoader`.
 
 ```python
-from signal_hydrator import ContextProxy, AsyncDataLoader, RESTAdapter
+from signal_siphon import ContextProxy, AsyncDataLoader, RESTAdapter
 
 # 1. Provide an adapter (e.g. Heuristic REST)
 adapter = RESTAdapter(base_url="https://api.example.com", root_resource="users")
@@ -76,7 +76,7 @@ hydrated_data = await loader.load(proxy)
 Expose your adapters directly to your agents using native LangChain tools.
 
 ```python
-from signal_hydrator import HydratorTool, RESTAdapter
+from signal_siphon import HydratorTool, RESTAdapter
 
 adapter = RESTAdapter(base_url="https://api.mycompany.com", root_resource="users")
 
@@ -89,14 +89,14 @@ llm_with_tools = llm.bind_tools([tool])
 
 ## Supported Adapters
 
-`signal-hydrator` supports expanding backends out of the box:
+`signal-siphon` supports expanding backends out of the box:
 
 - **GraphQLAdapter:** Translates dot-paths into optimized GraphQL selection sets (Requires `graphql-core`).
 - **RESTAdapter:** Heuristically builds root (`/users/1`) and sub-resource (`/users/1/orders`) endpoints by parsing paths.
 - **SQLAdapter (Experimental):** Translates deep path requests directly into SQL `SELECT ... LEFT JOIN` queries.
 
 ```python
-from signal_hydrator import SQLAdapter
+from signal_siphon import SQLAdapter
 
 adapter = SQLAdapter(connection_string="sqlite:///:memory:", root_table="users")
 # Path ["orders[0].id"] translates to:

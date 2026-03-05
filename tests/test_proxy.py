@@ -1,4 +1,4 @@
-from signal_hydrator.runtime.proxy import ContextProxy
+from signal_siphon.runtime.proxy import ContextProxy
 import pytest
 
 def test_proxy_records_paths_without_fetching():

@@ -1,5 +1,5 @@
 import pytest
-from signal_hydrator.adapters.sql import SQLAdapter
+from signal_siphon.adapters.sql import SQLAdapter
 
 def test_sql_adapter_builds_select_queries():
     """

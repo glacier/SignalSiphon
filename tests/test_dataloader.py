@@ -1,9 +1,9 @@
 import pytest
 import asyncio
 from typing import List, Dict, Any
-from signal_hydrator.runtime.dataloader import AsyncDataLoader
-from signal_hydrator.runtime.proxy import ContextProxy
-from signal_hydrator.adapters.base import SignalAdapter
+from signal_siphon.runtime.dataloader import AsyncDataLoader
+from signal_siphon.runtime.proxy import ContextProxy
+from signal_siphon.adapters.base import SignalAdapter
 
 class MockAdapter(SignalAdapter):
     def __init__(self):
