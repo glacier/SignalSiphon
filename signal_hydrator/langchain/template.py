@@ -56,7 +56,7 @@ class HydratedPromptTemplate(PromptTemplate):
         # 4. Render the template using standard Jinja instead of Langchain's restricted sandbox
         # LangChain blocks `{{ user.profile }}` by default, so we bypass their formatter entirely.
         import jinja2
-        env = jinja2.Environment()
+        env = jinja2.Environment(finalize=lambda x: "None" if x is None else x)
         rendered = env.from_string(self.template).render(**hydrated_context)
         
         return rendered

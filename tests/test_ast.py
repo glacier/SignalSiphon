@@ -42,3 +42,17 @@ def test_ignores_other_vars():
     paths = hydrator.extract_paths(template, "user")
     assert len(paths) == 1
     assert "name" in paths
+
+@pytest.mark.asyncio
+async def test_explicit_none_rendering():
+    hydrator = JinjaHydrator()
+    template = "Your age is {{ user.profile.age }}."
+    
+    # Simulate a fetch where `age` is None (null from GraphQL)
+    context = {"user": {"profile": {"age": None}}}
+    
+    # We can use a dummy adapter or just directly render to verify Jinja env
+    env_template = hydrator.env.from_string(template)
+    rendered = env_template.render(**context)
+    
+    assert rendered == "Your age is None."

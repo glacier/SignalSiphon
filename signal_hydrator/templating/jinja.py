@@ -9,7 +9,9 @@ class JinjaHydrator:
     """
 
     def __init__(self):
-        self.env = Environment()
+        # We explicitly cast `None` to the string "None" instead of the default empty string
+        # so that LLM prompts clearly show missing data context.
+        self.env = Environment(finalize=lambda x: "None" if x is None else x)
 
     def extract_paths(self, template_str: str, root_var: str) -> List[str]:
         """
